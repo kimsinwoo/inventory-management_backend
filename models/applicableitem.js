@@ -1,10 +1,13 @@
-'use strict';
-import { Model } from 'sequelize';
+"use strict";
 
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
   class ApplicableItem extends Model {
     static associate(models) {
-      ApplicableItem.hasMany(models.StorageCondition, { foreignKey: 'applicable_item_id' });
+      ApplicableItem.hasMany(models.StorageCondition, {
+        foreignKey: "applicable_item_id",
+      });
     }
   }
 
@@ -21,8 +24,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'ApplicableItem',
-      tableName: 'ApplicableItems',
+      modelName: "ApplicableItem",
+      tableName: "ApplicableItems",
       timestamps: false,
     }
   );

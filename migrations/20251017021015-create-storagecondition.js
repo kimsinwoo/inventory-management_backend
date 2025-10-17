@@ -1,7 +1,7 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+const migration = {
   async up (queryInterface, Sequelize) {
     /**
      * Add altering commands here.
@@ -20,3 +20,9 @@ module.exports = {
      */
   }
 };
+
+export default migration;
+
+if (typeof module !== "undefined") {
+  module.exports = migration;
+}

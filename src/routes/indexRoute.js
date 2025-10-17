@@ -1,8 +1,13 @@
-import e from "express";
-import approval from "../routes/approvalRoute.js";
+const { Router } = require("express");
 
-const app = e()
+const approvalRoute = require("./approvalRoute");
+const authRoute = require("./authRoute");
+const temperatureRoute = require("./temperatureRoute");
 
-app.use('/approval', approval)
+const router = Router();
 
-export default app
+router.use("/approval", approvalRoute);
+router.use("/auth", authRoute);
+router.use("/temperature", temperatureRoute);
+
+module.exports = router;

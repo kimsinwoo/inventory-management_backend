@@ -1,10 +1,11 @@
-'use strict';
-import { Model } from 'sequelize';
+"use strict";
 
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
   class Process extends Model {
     static associate(models) {
-      Process.hasMany(models.Factory, { foreignKey: 'process_id' });
+      Process.hasMany(models.Factory, { foreignKey: "process_id" });
     }
   }
 
@@ -19,8 +20,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Process',
-      tableName: 'Processes',
+      modelName: "Process",
+      tableName: "Processes",
       timestamps: false,
     }
   );

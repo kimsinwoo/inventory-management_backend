@@ -1,11 +1,12 @@
-'use strict';
-import { Model } from 'sequelize';
+"use strict";
 
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
   class Factory extends Model {
     static associate(models) {
-      Factory.hasMany(models.Item, { foreignKey: 'factory_id' });
-      Factory.belongsTo(models.Process, { foreignKey: 'process_id' });
+      Factory.hasMany(models.Item, { foreignKey: "factory_id" });
+      Factory.belongsTo(models.Process, { foreignKey: "process_id" });
     }
   }
 
@@ -16,15 +17,15 @@ export default (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      type: DataTypes.ENUM('1PreProcessing', '2Manufacturing'),
+      type: DataTypes.ENUM("1PreProcessing", "2Manufacturing"),
       name: DataTypes.STRING,
       address: DataTypes.STRING,
       process_id: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: 'Factory',
-      tableName: 'Factories',
+      modelName: "Factory",
+      tableName: "Factories",
       timestamps: false,
     }
   );

@@ -1,30 +1,30 @@
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 
 dotenv.config();
 
-export default {
+module.exports = {
   development: {
-    username: 'root',
+    username: "root",
     password: process.env.DEV_DB_PASSWORD,
-    database: 'inventory_development',
-    host: '127.0.0.1',
+    database: "inventory_development",
+    host: "127.0.0.1",
     port: 3306,
-    dialect: 'mysql',
+    dialect: "mysql",
   },
   test: {
-    username: 'root',
+    username: "root",
     password: process.env.DEV_DB_PASSWORD,
-    database: 'inventory_test',
-    host: '127.0.0.1',
+    database: "inventory_test",
+    host: "127.0.0.1",
     port: 3306,
-    dialect: 'mysql',
+    dialect: "mysql",
   },
   production: {
-    username: 'root',
+    username: "root",
     password: process.env.PRODUCTION_DB_PASSWORD,
-    database: 'inventory_production',
-    host: '127.0.0.1',
+    database: "inventory_production",
+    host: "127.0.0.1",
     port: 3306,
-    dialect: 'mysql',
+    dialect: "mysql",
   },
 };

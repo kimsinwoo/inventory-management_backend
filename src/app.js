@@ -1,17 +1,20 @@
-import express from "express";
-import dotenv from "dotenv";
-import db from "../models/index.js";
-import indexRoute from './routes/indexRoute.js'
+const express = require("express");
+const dotenv = require("dotenv");
+
+const db = require("../models");
+const indexRoute = require("./routes/indexRoute");
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const app = express();
+
+app.set("db", db);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api', indexRoute)
+app.use("/api", indexRoute);
 
 async function startServer() {
   try {
@@ -27,4 +30,6 @@ async function startServer() {
   }
 }
 
-await startServer();
+startServer();
+
+module.exports = app;
