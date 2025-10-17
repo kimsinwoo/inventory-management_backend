@@ -1,9 +1,8 @@
-import { Model, DataTypes } from "sequelize";
+const { Model, DataTypes } = require("sequelize");
 
-export default (sequelize) => {
+module.exports = (sequelize) => {
   class Temperature extends Model {
     static associate(models) {
-      // ✅ User 모델과 관계 설정 (foreignKey는 profile_id)
       Temperature.belongsTo(models.User, {
         foreignKey: "profile_id",
         targetKey: "id",
@@ -45,7 +44,7 @@ export default (sequelize) => {
       sequelize,
       modelName: "Temperature",
       tableName: "Temperature",
-      timestamps: true, // ✅ createdAt, updatedAt 자동 생성
+      timestamps: true,
       underscored: true,
     }
   );

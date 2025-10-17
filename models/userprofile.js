@@ -1,10 +1,11 @@
-'use strict';
-import { Model } from 'sequelize';
+"use strict";
 
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
   class UserProfile extends Model {
     static associate(models) {
-      UserProfile.hasOne(models.User, { foreignKey: 'profile_id' });
+      UserProfile.hasOne(models.User, { foreignKey: "profile_id" });
     }
   }
 
@@ -22,8 +23,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'UserProfile',
-      tableName: 'UserProfiles',
+      modelName: "UserProfile",
+      tableName: "UserProfiles",
       timestamps: false,
     }
   );

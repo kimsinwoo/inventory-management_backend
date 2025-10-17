@@ -1,13 +1,9 @@
-// models/index.js
-import { Sequelize } from "sequelize";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath, pathToFileURL } from "url";
-import configFile from "../config/config.js";
+const fs = require("fs");
+const path = require("path");
+const { Sequelize } = require("sequelize");
+const configFile = require("../config/config.js");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 const config = configFile[env];
 
@@ -20,17 +16,18 @@ const sequelize = new Sequelize(
 
 const db = {};
 
-// ✅ 모든 모델 자동 로드 (ESM + Windows 호환)
-const files = fs.readdirSync(__dirname).filter(
-  (file) =>
-    file.indexOf(".") !== 0 &&
-    file !== "index.js" &&
-    (file.endsWith(".js") || file.endsWith(".mjs"))
-);
+const files = fs
+  .readdirSync(__dirname)
+  .filter(
+    (file) =>
+      file.indexOf(".") !== 0 &&
+      file !== basename &&
+      (file.endsWith(".js") || file.endsWith(".mjs"))
+  );
 
 for (const file of files) {
-  const modelPath = pathToFileURL(path.join(__dirname, file));
-  const { default: modelDefiner } = await import(modelPath);
+  const modelPath = path.join(__dirname, file);
+  const modelDefiner = require(modelPath);
   const model = modelDefiner(sequelize, Sequelize.DataTypes);
   db[model.name] = model;
 }
@@ -44,4 +41,4 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export default db;
+module.exports = db;

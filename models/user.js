@@ -1,12 +1,12 @@
-import { Model } from 'sequelize';
+const { Model } = require("sequelize");
 
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.belongsTo(models.UserProfile, { foreignKey: 'profile_id' });
-      User.hasMany(models.Position, { foreignKey: 'user_id' });
-      User.hasMany(models.Approval, { foreignKey: 'author_id' });
-      User.hasMany(models.RequiredApprover, { foreignKey: 'user_id' });
+      User.belongsTo(models.UserProfile, { foreignKey: "profile_id" });
+      User.hasMany(models.Position, { foreignKey: "user_id" });
+      User.hasMany(models.Approval, { foreignKey: "author_id" });
+      User.hasMany(models.RequiredApprover, { foreignKey: "user_id" });
     }
   }
 
@@ -27,8 +27,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'User',
-      tableName: 'Users',
+      modelName: "User",
+      tableName: "Users",
       timestamps: false,
     }
   );
