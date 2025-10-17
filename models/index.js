@@ -1,37 +1,41 @@
-'use strict';
+// models/index.js
+import { Sequelize } from "sequelize";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath, pathToFileURL } from "url";
+import configFile from "../config/config.js";
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const env = process.env.NODE_ENV || "development";
+const config = configFile[env];
+
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  config
+);
+
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+// ✅ 모든 모델 자동 로드 (ESM + Windows 호환)
+const files = fs.readdirSync(__dirname).filter(
+  (file) =>
+    file.indexOf(".") !== 0 &&
+    file !== "index.js" &&
+    (file.endsWith(".js") || file.endsWith(".mjs"))
+);
+
+for (const file of files) {
+  const modelPath = pathToFileURL(path.join(__dirname, file));
+  const { default: modelDefiner } = await import(modelPath);
+  const model = modelDefiner(sequelize, Sequelize.DataTypes);
+  db[model.name] = model;
 }
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
+Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
@@ -40,4 +44,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+export default db;

@@ -1,7 +1,7 @@
 'use strict';
-const { Model } = require('sequelize');
+import { Model } from 'sequelize';
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   class ApplicableItem extends Model {
     static associate(models) {
       ApplicableItem.hasMany(models.StorageCondition, { foreignKey: 'applicable_item_id' });
