@@ -1,17 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
 import db from "../models/index.js";
-import indexRoute from './routes/indexRoute.js'
+import indexRoute from "./routes/indexRoute.js";
 
 dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
 
+app.set("db", db);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api', indexRoute)
+app.use("/api", indexRoute);
 
 async function startServer() {
   try {

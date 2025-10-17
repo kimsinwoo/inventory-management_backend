@@ -1,8 +1,8 @@
-import e from "express";
-import approval from "../routes/approvalRoute.js";
+import { Router } from "express";
+import approvalRoute from "./approvalRoute.js";
 
-const app = e()
+const router = Router();
 
-app.use('/approval', approval)
+router.use("/approval", approvalRoute);
 
-export default app
+export default router;
