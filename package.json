@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "db:init": "npx sequelize-cli init",
     "db:make-models": "powershell -ExecutionPolicy Bypass -File ./scripts/generate-models.ps1",
