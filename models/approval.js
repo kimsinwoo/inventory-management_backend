@@ -1,12 +1,13 @@
-'use strict'
-import { Model } from 'sequelize';
+"use strict";
 
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
   class Approval extends Model {
     static associate(models) {
-      Approval.belongsTo(models.User, { foreignKey: 'author_id' });
-      Approval.hasMany(models.Attachment, { foreignKey: 'approval_id' });
-      Approval.hasMany(models.RequiredApprover, { foreignKey: 'approval_id' });
+      Approval.belongsTo(models.User, { foreignKey: "author_id" });
+      Approval.hasMany(models.Attachment, { foreignKey: "approval_id" });
+      Approval.hasMany(models.RequiredApprover, { foreignKey: "approval_id" });
     }
   }
 
@@ -20,7 +21,7 @@ export default (sequelize, DataTypes) => {
       doc_number: DataTypes.STRING,
       title: DataTypes.STRING,
       type: DataTypes.STRING,
-      status: DataTypes.ENUM('Draft', 'Pending', 'Approved', 'Rejected'),
+      status: DataTypes.ENUM("Draft", "Pending", "Approved", "Rejected"),
       rejection_reason: DataTypes.TEXT,
       author_id: DataTypes.STRING,
       created_at: DataTypes.DATE,
@@ -33,8 +34,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Approval',
-      tableName: 'Approvals',
+      modelName: "Approval",
+      tableName: "Approvals",
       timestamps: false,
     }
   );

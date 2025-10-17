@@ -1,6 +1,13 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-const router = Router()
+const {
+  addTemperature,
+  getTemperatures,
+} = require("../controller/temperatureController");
 
-router.post('/temperature', AddTemperature)
-router.get('/temperature', GetTemperature)
+const router = Router();
+
+router.post("/", addTemperature);
+router.get("/", getTemperatures);
+
+module.exports = router;

@@ -1,7 +1,7 @@
 // src/controllers/authController.js
-import { loginUser, logoutUser } from "../services/authService.js";
+const { loginUser, logoutUser } = require("../services/authService");
 
-export async function login(req, res) {
+async function login(req, res) {
   try {
     const { username, password } = req.body;
     const user = await loginUser(req, username, password);
@@ -11,7 +11,7 @@ export async function login(req, res) {
   }
 }
 
-export async function logout(req, res) {
+async function logout(req, res) {
   try {
     await logoutUser(req);
     res.clearCookie("connect.sid");
@@ -20,3 +20,8 @@ export async function logout(req, res) {
     res.status(500).json({ message: "로그아웃 실패" });
   }
 }
+
+module.exports = {
+  login,
+  logout,
+};

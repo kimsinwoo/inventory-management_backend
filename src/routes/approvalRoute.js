@@ -1,9 +1,9 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-const router = Router()
+const router = Router();
 
-// router.post('/add', ApprovalAdd)
-// router.post('/check', ApprovalCheck)
-// router.get('/', GetApproval)
+// router.post("/add", ApprovalAdd);
+// router.post("/check", ApprovalCheck);
+// router.get("/", GetApproval);
 
-export default router
+module.exports = router;

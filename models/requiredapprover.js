@@ -1,11 +1,12 @@
-'use strict';
-import { Model } from 'sequelize';
+"use strict";
 
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
   class RequiredApprover extends Model {
     static associate(models) {
-      RequiredApprover.belongsTo(models.User, { foreignKey: 'user_id' });
-      RequiredApprover.belongsTo(models.Approval, { foreignKey: 'approval_id' });
+      RequiredApprover.belongsTo(models.User, { foreignKey: "user_id" });
+      RequiredApprover.belongsTo(models.Approval, { foreignKey: "approval_id" });
     }
   }
 
@@ -21,8 +22,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'RequiredApprover',
-      tableName: 'RequiredApprovers',
+      modelName: "RequiredApprover",
+      tableName: "RequiredApprovers",
       timestamps: false,
     }
   );

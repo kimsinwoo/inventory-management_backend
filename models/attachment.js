@@ -1,10 +1,11 @@
-'use strict';
-import { Model } from 'sequelize';
+"use strict";
 
-export default (sequelize, DataTypes) => {
+const { Model } = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
   class Attachment extends Model {
     static associate(models) {
-      Attachment.belongsTo(models.Approval, { foreignKey: 'approval_id' });
+      Attachment.belongsTo(models.Approval, { foreignKey: "approval_id" });
     }
   }
 
@@ -20,8 +21,8 @@ export default (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Attachment',
-      tableName: 'Attachments',
+      modelName: "Attachment",
+      tableName: "Attachments",
       timestamps: false,
     }
   );
