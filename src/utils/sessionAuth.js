@@ -28,6 +28,8 @@ async function authenticate(req, res, next) {
       const user = await db.User.findByPk(req.session.userId);
       if (!user) return res.status(401).json({ message: "사용자 없음" });
 
+      const user_profile = await db.userprofile
+
       await createSession(req, user);
     }
 
